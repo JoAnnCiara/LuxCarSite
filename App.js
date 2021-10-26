@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import { Nav, NavLink, NavItem } from 'reactstrap';
 import Directory from './components/DirectoryComponent';
+import { LUXCARS } from './shared/luxCars';
 import './App.css';
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            luxCars: LUXCARS
+        };
+    }
     render() {
         return (
             <div className="App" >
@@ -21,7 +28,7 @@ class App extends Component {
                         <NavLink href="#">Contact Us</NavLink>
                     </NavItem>
                 </Nav>
-                <Directory />
+                <Directory luxCars={this.state.luxCars} />
             </div>
         );
     }
