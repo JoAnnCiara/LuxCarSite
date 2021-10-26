@@ -1,46 +1,62 @@
-import React from 'react';
-import { Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
 
-function RenderDirectoryItem({campsite}) {
-    return (
-        <Card>
-            <Link to={`/directory/${campsite.id}`}>
-                <CardImg width="100%" src={campsite.image} alt={campsite.name} />
-                <CardImgOverlay>
-                    <CardTitle>{campsite.name}</CardTitle>
-                </CardImgOverlay>
-            </Link>
-        </Card>
-    );
-}
 
-function Directory(props) {
-    const directory = props.campsites.map(campsite => {
-        return (
-            <div key={campsite.id} className="col-md-5 m-1">
-                <RenderDirectoryItem campsite={campsite} />
-            </div>
-        );
-    });
+class Directory extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            luxCars: [
+                {
+                    id: 0,
+                    name: 'Aston Martin',
+                    image: 'assets/images/redaston.jpg',
+                    elevation: 1233,
+                    description: "Lorem Ipsum."
+                },
+                {
+                    id: 1,
+                    name: 'Mclaren ',
+                    image: 'assets/images/mclaren.jpg',
+                    elevation: 877,
+                    description: "Lorem Ipsum."
+                },
+                {
+                    id: 2,
+                    name: 'Ferrari',
+                    image: 'assets/images/ferrari.jpg',
+                    elevation: 2901,
+                    description: "Lorem Ipsum."
+                },
+                {
+                    id: 3,
+                    name: 'Lamborghini',
+                    image: 'assets/images/lambo.jpg',
+                    elevation: 42,
+                    description: "Lorem Ipsum."
+                }
+            ],
+        };
+    }
 
-    return (
-        <div className="container">
-            <div className="row">
+    render() {
+        const directory = this.state.luxCars.map(luxCar => {
+            return (
                 <div className="col">
-                    <Breadcrumb>
-                        <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
-                        <BreadcrumbItem active>Directory</BreadcrumbItem>
-                    </Breadcrumb>
-                    <h2>Directory</h2>
-                    <hr />
+                    <img src={luxCar.image} alt={luxCar.name} />
+                    <h2>{luxCar.name}</h2>
+                    <p>{luxCar.description}</p>
+                </div>
+            );
+        });
+
+        return (
+            <div className="container">
+                <div className="row">
+                    {directory}
                 </div>
             </div>
-            <div className="row">
-                {directory}
-            </div>
-        </div>
-    );
+        );
+    }
 }
 
 export default Directory;
