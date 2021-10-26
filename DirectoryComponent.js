@@ -1,50 +1,43 @@
 import React, { Component } from 'react';
-
+import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
 
 class Directory extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            luxCars: [
-                {
-                    id: 0,
-                    name: 'Aston Martin',
-                    image: 'assets/images/redaston.jpg',
-                    elevation: 1233,
-                    description: "Lorem Ipsum."
-                },
-                {
-                    id: 1,
-                    name: 'Mclaren ',
-                    image: 'assets/images/mclaren.jpg',
-                    elevation: 877,
-                    description: "Lorem Ipsum."
-                },
-                {
-                    id: 2,
-                    name: 'Ferrari',
-                    image: 'assets/images/ferrari.jpg',
-                    elevation: 2901,
-                    description: "Lorem Ipsum."
-                },
-                {
-                    id: 3,
-                    name: 'Lamborghini',
-                    image: 'assets/images/lambo.jpg',
-                    elevation: 42,
-                    description: "Lorem Ipsum."
-                }
-            ],
+            selectedLuxCar: null
         };
     }
 
-    render() {
-        const directory = this.state.luxCars.map(luxCar => {
+    onLuxCarSelect(luxCar) {
+        this.setState({ selectedLuxCar: luxCar });
+    }
+
+    renderSelectedLuxCar(luxCar) {
+        if (luxCar) {
             return (
-                <div className="col">
-                    <img src={luxCar.image} alt={luxCar.name} />
-                    <h2>{luxCar.name}</h2>
-                    <p>{luxCar.description}</p>
+                <Card>
+                    <CardImg top src={luxCar.image} alt={luxCar.name} />
+                    <CardBody>
+                        <CardTitle>{luxCar.name}</CardTitle>
+                        <CardText>{luxCar.description}</CardText>
+                    </CardBody>
+                </Card>
+            );
+        }
+        return <div />;
+    }
+
+    render() {
+        const directory = this.props.luxCars.map(luxCar => {
+            return (
+                <div key={luxCar.id} className="col-md-5 m-1">
+                    <Card onClick={() => this.onLuxCarSelect(luxCar)}>
+                        <CardImg width="100%" src={luxCar.image} alt={luxCar.name} />
+                        <CardImgOverlay>
+                            <CardTitle>{luxCar.name}</CardTitle>
+                        </CardImgOverlay>
+                    </Card>
                 </div>
             );
         });
@@ -53,6 +46,11 @@ class Directory extends Component {
             <div className="container">
                 <div className="row">
                     {directory}
+                </div>
+                <div className="row">
+                    <div className="col-md-5 m-1">
+                        {this.renderSelectedLuxCar(this.state.selectedLuxCar)}
+                    </div>
                 </div>
             </div>
         );
