@@ -1,60 +1,37 @@
-import React, { Component } from 'react';
-import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
+import React from 'react';
+import { Card, CardImg, CardImgOverlay, CardTitle } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
-class Directory extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            selectedLuxCar: null
-        };
-    }
+function RenderDirectoryItem({luxCar}) {
+    return (
+        <Card>
+            <Link to={`/directory/${luxCar.id}`}>
+                <CardImg width="100%" src={luxCar.image} alt={luxCar.name} />
+                <CardImgOverlay>
+                    <CardTitle>{luxCar.name}</CardTitle>
+                </CardImgOverlay>
+            </Link>
+        </Card>
+    );
+}
 
-    onLuxCarSelect(luxCar) {
-        this.setState({ selectedLuxCar: luxCar });
-    }
+function Directory(props) {
 
-    renderSelectedLuxCar(luxCar) {
-        if (luxCar) {
-            return (
-                <Card>
-                    <CardImg top src={luxCar.image} alt={luxCar.name} />
-                    <CardBody>
-                        <CardTitle>{luxCar.name}</CardTitle>
-                        <CardText>{luxCar.description}</CardText>
-                    </CardBody>
-                </Card>
-            );
-        }
-        return <div />;
-    }
-
-    render() {
-        const directory = this.props.luxCars.map(luxCar => {
-            return (
-                <div key={luxCar.id} className="col-md-5 m-1">
-                    <Card onClick={() => this.onLuxCarSelect(luxCar)}>
-                        <CardImg width="100%" src={luxCar.image} alt={luxCar.name} />
-                        <CardImgOverlay>
-                            <CardTitle>{luxCar.name}</CardTitle>
-                        </CardImgOverlay>
-                    </Card>
-                </div>
-            );
-        });
-
+    const directory = props.luxCars.map(luxCar => {
         return (
-            <div className="container">
-                <div className="row">
-                    {directory}
-                </div>
-                <div className="row">
-                    <div className="col-md-5 m-1">
-                        {this.renderSelectedLuxCar(this.state.selectedLuxCar)}
-                    </div>
-                </div>
+            <div key={luxCar.id} className="col-md-5 m-1">
+                <RenderDirectoryItem luxCar={luxCar} />
             </div>
         );
-    }
+    });
+
+    return (
+        <div className="container">
+            <div className="row">
+                {directory}
+            </div>
+        </div>
+    );
 }
 
 export default Directory;
