@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function RenderDirectoryItem({luxCar}) {
     return (
-        <Card>
+        <Card >
             <Link to={`/directory/${luxCar.id}`}>
                 <CardImg width="100%" src={luxCar.image} alt={luxCar.name} />
                 <CardImgOverlay>

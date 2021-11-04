@@ -1,6 +1,8 @@
 import React from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 
+// home page
+
 function RenderCard({ item }) {
     return (
         <Card>
@@ -15,19 +17,29 @@ function RenderCard({ item }) {
 
 function Home(props) {
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-md m-1">
-                    <RenderCard item={props.luxCar} />
-                </div>
-                <div className="col-md m-1">
-                    <RenderCard item={props.promotion} />
-                </div>
-                <div className="col-md m-1">
-                    <RenderCard item={props.partner} />
+        <React.Fragment>
+            <div className="container">
+                <div className="row">
+                    <div className="col-md m-1">
+                        <RenderCard item={props.luxCar} />
+                    </div>
                 </div>
             </div>
-        </div>
+            <div className="container">
+                <div className="row">
+                    <div className="col-md m-1">
+                        <RenderCard item={props.promotion} />
+                    </div>
+                </div>
+            </div>
+            <div className="container">
+                <div className="row">
+                    <div className="col-md m-1">
+                        <RenderCard item={props.partner} />
+                    </div>
+                </div>
+            </div>
+        </React.Fragment>
     );
 }
 
