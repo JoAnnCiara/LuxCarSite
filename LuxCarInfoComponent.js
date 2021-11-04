@@ -1,7 +1,8 @@
 import React from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
+// import { Link } from 'react-router-dom';
 
-
+// directory
 function RenderLuxCar({luxCar}) {
     return (
         <div className="col-md-5 m-1">

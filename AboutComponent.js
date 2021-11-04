@@ -1,61 +1,36 @@
 import React from 'react';
-import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Card, CardText, CardBody, CardTitle, CardImg, CardLink  } from 'reactstrap';
 
-function RenderPartner({partner}) {
-    if (partner) {
-        return (
-            <React.Fragment>
-                <Media object src={partner.image} alt={partner.name} width="150" />
-                <Media body className="ml-5 mb-4">
-                    <Media heading>{partner.name}</Media>
-                    {partner.description}
-                </Media>
-            </React.Fragment>
-         );
-    }
-    return <div />;
-};
-         
-function About(props) {
-    const partners = props.partners.map(partner => {
-        return (
-            <Media tag="li" key={partner.id}>
-                <RenderPartner partner={partner} />
-            </Media>
-         );
-    });
 
+function About (luxCar) {
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col">
-                    <Breadcrumb>
-                        <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
-                        <BreadcrumbItem active>About Us</BreadcrumbItem>
-                    </Breadcrumb>
-                    <h2>About Us</h2>
-                    <hr />
-                </div>
+            <div className="col-md-5 m-1">
+                <Card>
+                    <CardImg top src={luxCar.image} alt={luxCar.name} />
+                    <CardBody>
+                        <CardTitle>{luxCar.name}</CardTitle>
+                        <CardText>{luxCar.description}</CardText>
+                    </CardBody>
+                </Card>
+                <img
+                    alt="Card image cap"
+                    src="/assets/images/bug.jpg"
+                    width="100%"
+                />
+                   
+                <Card>
+                    <CardBody>
+                        <CardText>
+                            Some quick example text to build on the card title and make up the bulk of the card's content.
+                        </CardText>
+                        <CardLink href="#">
+                            Card Link
+                        </CardLink>
+                    </CardBody>
+                </Card>
             </div>
-            <div className="row row-content">
-                <div className="col-sm-6">
-                    <h3>Our Mission</h3>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias aut, repellat ipsum facere voluptate dicta obcaecati deserunt nobis suscipit eaque?</p>
-                </div>
-             </div>
-            <div className="row row-content">
-                <div className="col-12">
-                    <h3>Community Partners</h3>
-                </div>
-                <div className="col mt-4">
-                    <Media list>
-                        {partners}
-                    </Media>
-                </div>
-            </div>
-        </div>
-    );
+               
+        );
 }
 
 
